@@ -35,12 +35,13 @@ Either add it to your `NixOS` configuration:
             nixosConfigurations.default = nixpkgs.lib.nixosSystem {
                 modules = [ 
                     inputs.wakanix.nixosModules.wakanix
+                    
+                    {
+                        programs.wakanix.enable = {
+                            # Add options here
+                        };
+                    }
                 ];
-                {
-                    programs.wakanix.enable = {
-                        # Add options here
-                    };
-                }
             };
         };
     };
@@ -64,12 +65,13 @@ Or add it to your `homeManager` configuration (can be used as a nixosModule or s
             homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
                 modules = [ 
                     inputs.wakanix.homeManagerModules.wakanix
+                
+                    {
+                        programs.wakanix.enable = {
+                            # Add options here
+                        };
+                    }
                 ];
-                {
-                    programs.wakanix.enable = {
-                        # Add options here
-                    };
-                }
             };
         };
     };
