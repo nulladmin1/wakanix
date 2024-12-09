@@ -1,6 +1,6 @@
 # WakaNix
 
-Manage Wakatime using the WakaNix nixosModule and homeManagerModule
+Manage Wakatime using the WakaNix homeManagerModule
 
 ## Usage
 
@@ -20,36 +20,7 @@ Add `WakaNix` to your inputs:
     };
 }
 ```
-
-Either add it to your `NixOS` configuration:
-```nix
-{
-    description = "Your NixOS Configuration";
-
-    outputs = {
-        wakanix,
-        ...
-    }@ inputs: let 
-        system = "x86_64-linux";
-        in {
-            nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-                modules = [ 
-                    inputs.wakanix.nixosModules.wakanix
-                    
-                    {
-                        programs.wakanix.enable = {
-                            # Add options here
-                        };
-                    }
-                ];
-            };
-        };
-    };
-}
-```
-
-
-Or add it to your `homeManager` configuration (can be used as a nixosModule or standalone):
+Add it to your `homeManager` configuration (can be used as a nixosModule or standalone):
 ```nix
 {
     description = "Your NixOS Configuration";
@@ -61,13 +32,13 @@ Or add it to your `homeManager` configuration (can be used as a nixosModule or s
     }@ inputs: let 
         system = "x86_64-linux";
         in {
-            # Example standalone
+            # Example standalone configuration
             homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
                 modules = [ 
                     inputs.wakanix.homeManagerModules.wakanix
                 
                     {
-                        programs.wakanix.enable = {
+                        programs.wakanix = {
                             # Add options here
                         };
                     }
@@ -77,4 +48,6 @@ Or add it to your `homeManager` configuration (can be used as a nixosModule or s
     };
 }
 ```
+
+## Options:
 
