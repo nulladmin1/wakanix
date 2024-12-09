@@ -17,23 +17,6 @@
   in {
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    devShells = forEachSystem (system: {
-      default = pkgsFor.${system}.mkShell {
-        packages = with pkgsFor.${system}; [
-          hello
-        ];
-      };
-    });
-
-    packages = forEachSystem (system: {
-      default = pkgsFor.${system}.hello;
-    });
-
-    apps = forEachSystem (system: {
-      default = {
-        type = "app";
-        program = "${self.packages.${system}.default}/bin/hello";
-      };
-    });
+    homeManagerModules = import ./modules;
   };
 }
