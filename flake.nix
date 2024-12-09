@@ -1,5 +1,5 @@
 {
-  description = "Nix Flake Template for Development";
+  description = "WakaNix";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -18,7 +18,5 @@
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     homeManagerModules = import ./modules/homeManagerModules;
-
-    nixosModules = import ./modules/nixosModules;
   };
 }

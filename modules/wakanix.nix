@@ -8,6 +8,12 @@
     programs.wakanix = {
       enable = lib.mkEnableOption "Enable declarative configuration for wakatime using wakanix";
 
+      configFilePath = lib.mkOption {
+        type = lib.types.path;
+        default = config.home.homeDirectory + ".wakatime.cfg";
+        description = "Path to .wakatime.cfg";
+      };
+
       settings = {
         api = {
           url = lib.mkOption {
