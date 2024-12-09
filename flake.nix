@@ -17,8 +17,8 @@
   in {
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    homeManagerModules = import ./modules;
+    homeManagerModules = import ./modules/homeManagerModules;
 
-    nixosModules = import ./modules;
+    nixosModules = import ./modules/nixosModules;
   };
 }
