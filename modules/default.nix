@@ -1,4 +1,4 @@
 {self, ...}: {
-  wakanix = import ./wakanix.nix;
+  wakanix = import ./wakanix.nix {};
   default = self.wakanix;
 }
