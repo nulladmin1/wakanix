@@ -1,6 +1,6 @@
 # WakaNix
 
-Manage Wakatime using the WakaNix homeManagerModule
+Manage Wakatime (`.wakatime.cfg`) using the WakaNix homeManagerModule
 
 ## Usage
 
