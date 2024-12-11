@@ -57,10 +57,15 @@
             };
           };
         };
+          
+        extraSettings = lib.mkOption {
+          type = lib.types.attrsOf lib.types.anything;
+          default = {};
+          description = "Other settings options";
+        };
       };
-
-      extraSettings = lib.mkOption {
-        type = lib.types.attrsOf lib.types.str;
+      extraConf = lib.mkOption {
+        type = lib.types.attrsOf lib.types.anything;
         default = {};
         description = "Other configuration options";
       };
@@ -76,8 +81,7 @@
           {
             api_url = cfg.settings.api.url;
             api_key = cfg.settings.api.key;
-          }
-          // cfg.extraSettings;
-      };
+          } // cfg.settings.extraSettings;
+      } // cfg.extraConf;
     };
 }
