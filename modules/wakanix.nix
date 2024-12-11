@@ -10,7 +10,7 @@
 
       configFilePath = lib.mkOption {
         type = lib.types.path;
-        default = config.home.homeDirectory + ".wakatime.cfg";
+        default = config.home.homeDirectory + "/.wakatime.cfg";
         description = "Path to .wakatime.cfg";
       };
 
@@ -26,6 +26,35 @@
             type = lib.types.str;
             default = "";
             description = "The key for Wakatime";
+          };
+        };
+        debug = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Enable debug (false by default)";
+        };
+        hide = {
+          project = {
+            names = lib.mkOption {
+              type = 
+                with lib.types;
+                oneOf [
+                  bool
+                  list
+                ];
+              default = false;
+              description = "Hide project names";
+            };
+            folder = lib.mkOption {
+              type = 
+                with lib.types;
+                oneOf [
+                  bool
+                  list
+                ];
+              default = false;
+              description = "Hide project folders";
+            };
           };
         };
       };
