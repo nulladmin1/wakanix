@@ -6,12 +6,18 @@
 }: {
   options = {
     programs.wakanix = {
-      enable = lib.mkEnableOption "Enable declarative configuration for wakatime using wakanix";
+      enable = lib.mkEnableOption "Enable declarative configuration for wakatime using WakaNix";
 
       configFilePath = lib.mkOption {
         type = lib.types.path;
         default = config.home.homeDirectory + "/.wakatime.cfg";
         description = "Path to .wakatime.cfg";
+      };
+
+      envApiKey = lib.mkOption {
+        type = with lib.types; oneOf [bool str];
+        default = false;
+        description = "Enable using $WAKATIME_API_KEY to set api key. True enables it and uses the one in the settings, and str uses that as the var.";
       };
 
       settings = lib.mkOption {
@@ -36,8 +42,14 @@
     cfg = config.programs.wakanix;
   in
     lib.mkIf cfg.enable {
-      home.file."${cfg.configFilePath}".text = lib.generators.toINI {} {
-        settings = cfg.settings
-      } // cfg.extraConf;
+      home.file."${cfg.configFilePath}".text =
+        lib.generators.toINI {} {
+          inherit (cfg) settings;
+        }
+        // cfg.extraConf;
+
+      home.sessionVariables = {
+        "WAKATIME_API_KEY" = lib.mkIf (lib.types.isString cfg.envApiKey) cfg.envApiKey;
+      };
     };
 }
