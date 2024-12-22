@@ -46,7 +46,7 @@
         lib.generators.toINI {} {
           inherit (cfg) settings;
         }
-        // cfg.extraConf;
+        // cfg.config;
 
       home.sessionVariables = {
         "WAKATIME_API_KEY" = lib.mkIf (lib.types.isString cfg.envApiKey) cfg.envApiKey;
