@@ -35,22 +35,21 @@
         default = {};
         description = "Other configuration options";
       };
-
-      generatedConfigFileString = let
-        cfg = config.programs.wakanix;
-      in
-        lib.generators.toINI {} ({inherit (cfg) settings;} // cfg.config);
     };
   };
 
   config = let
     cfg = config.programs.wakanix;
+    generatedConfigFileString = lib.generators.toINI {} ({inherit (cfg) settings;} // cfg.config);
   in
-    lib.mkIf cfg.enable {
-      home.file."${cfg.configFilePath}".text = cfg.generatedConfigFileString;
+    (lib.mkIf cfg.enable {
+      home.file."${cfg.configFilePath}".text = generatedConfigFileString;
 
       home.sessionVariables = lib.attrsets.optionalAttrs (builtins.isString cfg.envApiKey) {
         "WAKATIME_API_KEY" = cfg.envApiKey;
       };
+    })
+    // {
+      inherit generatedConfigFileString;
     };
 }
