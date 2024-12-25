@@ -43,10 +43,7 @@
   in
     lib.mkIf cfg.enable {
       home.file."${cfg.configFilePath}".text =
-        lib.generators.toINI {} {
-          inherit (cfg) settings;
-        }
-        // cfg.config;
+        lib.generators.toINI {} ({inherit (cfg) settings;} // cfg.config);
 
       home.sessionVariables = lib.attrsets.optionalAttrs (builtins.isString cfg.envApiKey) {
         "WAKATIME_API_KEY" = cfg.envApiKey;
