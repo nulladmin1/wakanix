@@ -48,7 +48,7 @@
         }
         // cfg.config;
 
-      home.sessionVariables = lib.attrsets.optionalAttrs builtins.isString cfg.envApiKey {
+      home.sessionVariables = lib.attrsets.optionalAttrs (builtins.isString cfg.envApiKey) {
         "WAKATIME_API_KEY" = cfg.envApiKey;
       };
     };
