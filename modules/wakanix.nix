@@ -49,7 +49,7 @@
         // cfg.config;
 
       home.sessionVariables = {
-        "WAKATIME_API_KEY" = lib.mkIf (lib.types.isString cfg.envApiKey) cfg.envApiKey;
+        "WAKATIME_API_KEY" = lib.mkIf (builtins.isString cfg.envApiKey) cfg.envApiKey;
       };
     };
 }
