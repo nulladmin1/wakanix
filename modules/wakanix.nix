@@ -42,14 +42,11 @@
     cfg = config.programs.wakanix;
     generatedConfigFileString = lib.generators.toINI {} ({inherit (cfg) settings;} // cfg.config);
   in
-    (lib.mkIf cfg.enable {
+    lib.mkIf cfg.enable {
       home.file."${cfg.configFilePath}".text = generatedConfigFileString;
 
       home.sessionVariables = lib.attrsets.optionalAttrs (builtins.isString cfg.envApiKey) {
         "WAKATIME_API_KEY" = cfg.envApiKey;
       };
-    })
-    // {
-      programs.wakanix.generatedConfigFileString = generatedConfigFileString;
     };
 }
