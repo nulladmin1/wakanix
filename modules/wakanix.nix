@@ -50,6 +50,6 @@
       };
     })
     // {
-      cfg.generatedConfigFileString = generatedConfigFileString;
+      programs.wakanix.generatedConfigFileString = generatedConfigFileString;
     };
 }
