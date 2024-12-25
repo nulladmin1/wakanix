@@ -50,6 +50,6 @@
       };
     })
     // {
-      inherit generatedConfigFileString;
+      cfg.generatedConfigFileString = generatedConfigFileString;
     };
 }
